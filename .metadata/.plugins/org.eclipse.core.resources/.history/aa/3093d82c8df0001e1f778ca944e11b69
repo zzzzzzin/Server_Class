@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//POST > 한글 인코딩
+	request.setCharacterEncoding("UTF-8");
+
+	//request.getParameter()
+	//1. 입력하면 => 입력값 반환
+	//2. 입력 안 하면 => "" 반환
+	//3. 컨트롤X, 키 오류 => null 반환
+	String txt1 = request.getParameter("txt1");
+	
+	System.out.println(txt1 == null);
+	System.out.println(txt1 == "");
+	
+	//암호 상자
+	String txt2 = request.getParameter("txt2");
+	
+	//멀티 텍스트
+	String txt3 = request.getParameter("txt3");
+	
+%> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<h1>결과</h1>
+	
+	<h2>텍스트 박스</h2>
+	<div><%= txt1 %></div>
+
+	<h2>암호 박스</h2>
+	<div><%= txt2 %></div>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

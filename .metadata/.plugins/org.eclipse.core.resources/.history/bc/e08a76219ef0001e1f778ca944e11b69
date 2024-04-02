@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<h1>request > 요청 정보 확인</h1>
+	
+	<p>요청 URL: <%= request.getRequestURI() %></p>
+	<p>요청 서버 도메인: <%= request.getServerName() %></p>
+	<p>요청 서버 포트: <%= request.getServerPort() %></p>
+	<p>요청 문자열: <%= request.getQueryString() %></p>
+	<p>요청 방식: <%= request.getMethod() %></p>
+	<p>요청 : <%= request.get %></p>
+	<p>요청 : <%= request.get %></p>
+	<p>요청 : <%= request.get %></p>
+	<p>요청 : <%= request.get %></p>
+	<p>요청 : <%= request.get %></p>
+
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

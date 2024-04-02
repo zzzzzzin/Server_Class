@@ -1,0 +1,69 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<form method="POST" action="ex12_ok2.jsp">
+	<h1>버튼 만들기</h1>
+	<table>
+		<tr>
+			<th>너비(px)</th>
+			<td><input type="number" min="100" max="500" step="10" name="width"></td>
+		</tr>
+		<tr>
+			<th>높이(px)</th>
+			<td><input type="number" min="100" max="500" step="10" name="height"></td>
+		</tr>
+		<tr>
+			<th>텍스트</th>
+			<td><input type="text" name="txt1"></td>
+		</tr>
+		<tr>
+			<th>배경색</th>
+			<td><input type="color" name="bgcolor"></td>
+		</tr>
+		<tr>
+			<th>글자색</th>
+			<td><input type="color" name="fontcolor"></td>
+		</tr>
+		<tr>
+			<th>글자 크기(px)</th>
+			<td><input type="color" name="fontcolor"></td>
+		</tr>
+		<tr>
+			<th>버튼 개수(ea)</th>
+			<td><input type="number" min="1" max="30" name="nums"></td>
+		</tr>
+		<tr>
+			<th>버튼간격</th>
+			
+			<td>
+				좌우 간격: 
+				<input type="range" min="1" max="30" name="nums">
+				상하 간격: 
+				<input type="number" min="1" max="30" name="nums">
+			</td>
+		</tr>
+	</table>
+		<div>
+			<input type="submit" value="만들기">
+		</div>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

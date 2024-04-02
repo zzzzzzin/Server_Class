@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	int a = 10;
+
+	//이미 이 구역은 메서드 내부라 메서드 사용 불가능 => 선언부 등장
+	/* 
+		public void test() {
+		
+		}
+	*/
+
+%>    
+<%!
+	//선언부
+	int b = 20;
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

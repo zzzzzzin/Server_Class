@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%-- 
+		page 지시자
+		- JSP 페이지 실행 환경 설정 > 톰캣에게 알려준다.
+		- JSP 페이지에 항상 첫줄에 작성
+		- 1개 이상 작성 가능
+	
+		<%@ page language="java" contentType="text/html; charset=UTF-8"
+    	pageEncoding="UTF-8"%>
+    	
+    	a. language="java"
+    		- JSP 페이지에서 사용할 프로그래밍 언어 지정
+    	
+    	b. contentType="text/html; charset=UTF-8"
+    		- JSP 페이지의 콘텐츠에 대한 기술
+    		- text/html: MIME 타입 > HTML 문서 > 브라우저에게 전달
+    		- charset=UTF-8": 인코딩 > HTML 문서 > 브라우저에게 전달
+    	
+    	c. pageEncoding="UTF-8"
+    		- 현재 JSP 페이지의 인코딩
+ --%>	 	
+</body>
+</html>

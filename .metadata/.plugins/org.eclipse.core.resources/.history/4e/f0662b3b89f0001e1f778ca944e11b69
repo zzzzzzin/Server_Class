@@ -1,0 +1,74 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<h1>폼 관련 입력 태그</h1>
+	
+	<!-- 폼태그 사용 > 거의 POST(GET을 사용하는 경우는 지정되어있음) -->
+	<form method="POST" action="ex11_ok.jsp">
+		<table class="verrtical">
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+		</table>
+		<div>
+			<input type="button" value="보내기">
+		</div>
+	</form>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+
