@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<h1>EL</h1>
+	<%
+		
+		int a = 10; //자바의 데이터 > 화면 출력
+		
+		//*** EL은 평범한 출력문이 아니라, 내장 객체의 컬렉션값을 출력하는 전용 출력문이다.
+		//pageContext, request, session, application
+		
+		pageContext.setAttribute("b", 20);
+		request.setAttribute("c", 30);
+		
+		session.setAttribute("c", 40);
+
+		session.setAttribute("d", 40);
+		
+		
+	%>
+	<h2>표현식</h2>
+	<div><%= a %></div>
+	<div>b: <%= pageContext.getAttribute("b") %></div>
+	<div>c: <%= request.getAttribute("c") %></div>
+	<div>d: <%= session.getAttribute("d") %></div>
+	
+	<h2>EL</h2>
+	<div>a: ${a}</div>
+	<div>b: ${pageContext.getAttribute("b")}</div> <!-- 권장 x -->
+	<div>b: ${b}</div>	<!-- 권장! -->
+	<div>c: ${c}</div>	<!-- 권장! -->
+	<div>d: ${d}</div>	<!-- 권장! -->
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

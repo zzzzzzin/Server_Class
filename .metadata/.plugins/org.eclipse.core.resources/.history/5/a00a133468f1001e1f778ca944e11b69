@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	#list {
+		/* outline: 10px solid black; */
+		width: 750px;
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0;
+		margin-left: 25px;
+	}
+	#list > div {
+		border: 1px solid #999;
+		width: 126px;
+		height: 126px;
+		margin: 11px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+	#list > div > span {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	
+</style>
+</head>
+<body>
+	<h1>Image Gallery</h1>
+	
+	<div id="list">
+		<% for (int i=0; i<10; i++) { %>
+		<div style="background-image:url(pic/cat01.jpg);">
+			<span title></span>
+		</div>
+		<% } %>
+	</div>
+	
+	<form>
+	
+	</form>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<h1>파일 업로드</h1>
+	
+	<!-- 
+		파일 업로드 설정
+		1. <form method="POST">
+		2. <form enctype="">
+			a. application/x-www-form-urlencoded
+			b. multipart/form-data
+		3. <input type="file">
+		
+	-->
+	
+	<form method="POST" action="ex19_ok.jsp">
+		<table class="vetrical">
+			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+

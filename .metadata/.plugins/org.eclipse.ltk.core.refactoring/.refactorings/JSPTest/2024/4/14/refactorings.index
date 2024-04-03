@@ -8,3 +8,12 @@
 1712027637252	Move 'ex13_request.jsp' to 'webapp'
 1712029000448	Rename resource 'ex14_response.jsp'
 1712029023784	Rename resource 'ex14_response1.jsp'
+1712107950184	Delete element
+1712109903686	Move 2 resources to 'webapp'
+1712112462237	Copy file
+1712112524423	Move 'ex21_del.jsp' to 'webapp'
+1712112526601	Move 'ex21_form.jsp' to 'webapp'
+1712112530761	Move 'ex21_ok.jsp' to 'webapp'
+1712114365058	Delete element
+1712114856129	Rename resource 'ex21_form.jsp'
+1712132331428	Move 'ex22.jsp' to 'webapp'

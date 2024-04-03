@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	
+</style>
+</head>
+<body>
+	<!-- ex23_jstl.jsp -->
+	<h1>JSTL</h1>
+	
+	<h2>변수 선언</h2>
+	
+	<%
+		int a = 10; //지역 변수
+		pageContext.setAttribute("b", 20); //pageContext 변수
+	%>
+	
+	<c:set var="c" value="30" /> <!-- JSTL 변수 -->
+	
+	<div>a: <%= a %></div>
+	<div>a: ${a}</div>
+	
+	<div>b: <%= pageContext.getAttribute("b") %></div>
+	<div>b: ${b}</div>
+	
+	<%-- <div>c: <%= c %></div> --%>
+	<div>c: ${c}</div>
+	<div>c: <%= pageContext.getAttribute("c") %></div>
+	
+	<h2>변수 수정하기</h2>
+	<c:set var="c" value="50" ></c:set>
+	<div>c: ${c}</div>
+	
+	<h2>변수 삭제하기</h2>
+	<c:remove var="c"/>
+	<div>c: ${empty c}</div>
+	
+	<h2>조건문</h2>
+	<c:set var="num" value="10"/>
+	<c:if test="${num > 0}">
+		<div>${num}</div>은 양수입니다.
+	</c:if>
+	<c:if test="${num < 0}">
+		<div>${num}</div>은 음수입니다.
+	</c:if>
+	
+	<h2>조건문</h2>
+	<c:choose>
+		<c:when test="${num > 0}">양수</c:when>
+		<c:when test="${num < 0}">음수</c:when>
+		<c:otherwise>0</c:otherwise>
+	</c:choose>
+	
+	<h2>반복문(일반 for + 향상된 for)</h2>
+	
+	<% for (int i=0; i<=9; i++) { %>
+		<div>숫자: <%= i %></div>
+	<% } %>
+	
+	<c:forEach var="i" begin="0" end="9" step="1"> 
+		<!-- var i는 pageContext 변수로 EL로 출력-->
+		<div>숫자: ${i}</div>
+	</c:forEach>
+	
+	
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

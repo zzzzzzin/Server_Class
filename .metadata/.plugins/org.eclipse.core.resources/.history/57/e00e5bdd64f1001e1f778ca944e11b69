@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+<style>
+	#list {
+		outline: 10px solid black;
+		width: 800px;
+	}
+	#list > div {
+	
+	}
+	
+	
+</style>
+</head>
+<body>
+	<h1>Image Gallery</h1>
+	
+	<div id="list">
+		<% for (int i=0; i<10; i++) { %>
+		<div style="background-image: url(pic/cat01.jpg);"></div>
+		<% } %>
+	</div>
+	
+	<form action="">
+	
+	</form>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
+
+
+
+
