@@ -1,0 +1,41 @@
+#list {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 24px;
+}
+
+#list .item {
+	border: 1px solid #999;
+	width: 240px;
+	min-height: 240px;
+	margin: 5px;
+	margin-bottom: 60px;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+#list .item > div:nth-child(1){
+	/* 메모 내용입니다. */
+	height: 150px;
+	overflow: auto;
+	padding: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#list .item > div:nth-child(2){
+	/* 홍길동 2024-04-04 14:11:58 */
+	font-size: 14px;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+#list .item > div:nth-child(3){
+	/* 수정하기 버튼, 삭제하기 버튼 */
+	position: absolute;
+	bottom: -40px;
+	right: 0;
+	width: 240px;
+	text-align: center;	
+}
+	
