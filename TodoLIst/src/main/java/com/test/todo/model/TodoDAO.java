@@ -40,11 +40,11 @@ public class TodoDAO {
 	}
 	
 	//목록 보기
-	public ArrayList<TodoDTO> list() {
+	public ArrayList<TodoDTO> list(String state) {
 		
 		try {
 			
-			String sql = "select * from tblTodo";
+			String sql = String.format("select * from tblTodo where state = '%s' order by seq desc", state);
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -73,15 +73,15 @@ public class TodoDAO {
 		return null;		
 	}
 	
+	
 	//할일 체크하기(했다. 안했다.)
 	public int checkTodo(String seq) {
+		
 		try {
-
-			//n -변환-> y
-			//y -변환-> n
 			
+			//n > y
+			//y > n
 			String sql = "select state from tblTodo where seq = ?";
-			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, seq);
 			
@@ -108,13 +108,14 @@ public class TodoDAO {
 			pstat.setString(1, state);
 			pstat.setString(2, seq);
 			
-			return pstat.executeUpdate();
+			return pstat.executeUpdate();			
 			
 		} catch (Exception e) {
 			System.out.println("TodoDAO.checkTodo");
 			e.printStackTrace();
 		}
-		return 0;
+		
+		return 0;		
 	}
 
 }

@@ -31,11 +31,15 @@ class DAOTest {
 	@Disabled
 	@Test
 	void testListTodo() {
+		
 		TodoDAO dao = new TodoDAO();
 		
-		ArrayList<TodoDTO> list = dao.list();
+		ArrayList<TodoDTO> list = dao.list("y");
 		
-		assertNotNull(list); 
+		System.out.println(list == null);
+		
+		assertNotNull(list);
+		
 	}
 	
 	@Test

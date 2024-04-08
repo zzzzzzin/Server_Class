@@ -8,3 +8,7 @@ create table tblTodo (
 );
 
 create sequence seqTodo;
+
+select * from tblTodo;
+
+update tblTodo set state = 'y' where in seq(1,2);
