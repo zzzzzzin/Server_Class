@@ -36,6 +36,17 @@
   		<servlet-name>add</servlet-name>
   		<url-pattern>/add.do</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+		<servlet-name>chart01</servlet-name>
+		<servlet-class>com.test.api.chart.Ex01</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>chart01</servlet-name>
+		<url-pattern>/chart01.do</url-pattern>	
+	</servlet-mapping>
+
   
   
   

@@ -21,7 +21,7 @@
 	<div>
 		<div id="map"></div>
 	</div>
-		
+	<div class="message"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0fb77c9349f336937b323fe396a8e90"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>

@@ -11,6 +11,10 @@ C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\36116
 \JSPTest\src\main\java
 C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3645016721.index
 \JSPTest\src\main\java
+C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2753593782.index
+\AjaxTest\src\main\java
+C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2998028190.index
+\OpenAPITest\src\main\java
 C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2554342885.index
 \OpenAPITest\src\main\java
 C:\class\code\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2626395307.index
