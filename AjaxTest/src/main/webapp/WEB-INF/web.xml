@@ -95,9 +95,11 @@
 		<servlet-name>ex05check</servlet-name>
 		<url-pattern>/ex05check.do</url-pattern>
 	</servlet-mapping>
-
-
-
+	
+	
+	
+	
+	
 	<servlet>
 		<servlet-name>ex06</servlet-name>
 		<servlet-class>com.test.ajax.Ex06</servlet-class>
@@ -117,8 +119,9 @@
 	</servlet-mapping>
 	
 	
-
-
+	
+	
+	
 	<servlet>
 		<servlet-name>ex07</servlet-name>
 		<servlet-class>com.test.ajax.Ex07</servlet-class>
@@ -135,6 +138,91 @@
 	<servlet-mapping>
 		<servlet-name>ex07check</servlet-name>
 		<url-pattern>/ex07check.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	<servlet>
+		<servlet-name>ex08</servlet-name>
+		<servlet-class>com.test.ajax.Ex08</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex08</servlet-name>
+		<url-pattern>/ex08.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ex08data</servlet-name>
+		<servlet-class>com.test.ajax.Ex08Data</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex08data</servlet-name>
+		<url-pattern>/ex08data.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	<servlet>
+		<servlet-name>ex09</servlet-name>
+		<servlet-class>com.test.ajax.Ex09</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex09</servlet-name>
+		<url-pattern>/ex09.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ex09data</servlet-name>
+		<servlet-class>com.test.ajax.Ex09Data</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex09data</servlet-name>
+		<url-pattern>/ex09data.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	<servlet>
+		<servlet-name>ex10</servlet-name>
+		<servlet-class>com.test.ajax.Ex10</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex10</servlet-name>
+		<url-pattern>/ex10.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ex10data</servlet-name>
+		<servlet-class>com.test.ajax.Ex10Data</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex10data</servlet-name>
+		<url-pattern>/ex10data.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>ex10add</servlet-name>
+		<servlet-class>com.test.ajax.Ex10Add</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex10add</servlet-name>
+		<url-pattern>/ex10add.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ex10del</servlet-name>
+		<servlet-class>com.test.ajax.Ex10Del</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ex10del</servlet-name>
+		<url-pattern>/ex10del.do</url-pattern>
 	</servlet-mapping>
 	
 	
