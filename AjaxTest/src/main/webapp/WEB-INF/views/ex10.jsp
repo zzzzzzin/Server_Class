@@ -46,6 +46,7 @@
 				<td>${dto.gender == 'm' ? '남자' : '여자'}</td>
 				<td>
 					${dto.address}
+					<span onclick="edit();">edit</span>
 					<span onclick="del(${dto.seq});">&times;</span>
 				</td>
 			</tr>
@@ -54,11 +55,8 @@
 	</table>
 	
 	<hr>
-	<div>
-	    <button class="sidebar" data-sidebar-button="sidebar">사이드바 열기</button>
-	</div>
 	
-	<form id="form2"  data-sidebar-window="sidebar" data-sidebar-title="추가하기">
+	<form id="form2">
 	<div>
 		<label>이름: </label>
 		<input type="text" name="name" id="name">
@@ -233,6 +231,20 @@
 				}
 			});
 			
+		}
+		
+		function edit() {
+			
+			const td2 = $(event.target).parent().parent().children().eq(1);
+			const name = td2.text();
+			//alert(name);
+			
+			td2.html('<input type="text" class="short" value="' + name + '">');
+			
+			const td3 = $(event.target).parent().parent().children().eq(2);
+			const name = td3.text();
+
+			td3.html('<input type="text" class="short" value="' + age + '">');
 		}
 	
 	</script>
