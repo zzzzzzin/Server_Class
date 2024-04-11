@@ -242,9 +242,10 @@
 			td2.html('<input type="text" class="short" value="' + name + '">');
 			
 			const td3 = $(event.target).parent().parent().children().eq(2);
-			const name = td3.text();
-
+			const age = td3.text();
+			
 			td3.html('<input type="text" class="short" value="' + age + '">');
+			
 		}
 	
 	</script>
