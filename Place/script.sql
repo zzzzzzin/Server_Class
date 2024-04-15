@@ -33,6 +33,10 @@ commit;
 
 select * from tblPlace order by seq;
 
+create user hr identified by java1234;
+
+alter user hr account unlock;
+alter user hr identified by unlock;
 
 
 
