@@ -30,12 +30,12 @@
 			<tr>
 				<td>${dto.seq}</td>
 				<td>
-					${dto.subject}
+					<a href="/toy/board/view.do?seq=${dto.seq}">${dto.subject}</a>
 					
 					<!-- 최신글 표시 -->
-					<c:if test="${dto.isnew < 1 / 24 }">
+					<c:if test="${dto.isnew < 1 / 24}">
 					<span class="isnew">new</span>
-					</c:if>
+					</c:if>	
 				</td>
 				<td>${dto.name}</td>
 				<td>${dto.regdate}</td>
@@ -44,6 +44,7 @@
 			</c:forEach>
 		</table>
 		
+		
 		<div>
 			<!-- 
 			<button type="button" class="back" onclick="location.href='';"></button> 
@@ -51,6 +52,22 @@
 			<button type="button" class="add primary" onclick="location.href='/toy/board/add.do';">쓰기</button>
 		</div>
 		
+		
+		<!-- <style>
+			#test {
+				border: 1px solid black;
+				width: 300px;
+				height: 24px;
+				
+				overflow: hidden;
+				white-space: nowrap;
+				word-break: break-all;
+				text-overflow: ellipsis;
+			}
+		</style>
+		<div id="test">
+			안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요. 안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요. new
+		</div> -->
 		
 	</div>
 	

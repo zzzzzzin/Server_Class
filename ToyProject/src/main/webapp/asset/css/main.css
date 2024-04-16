@@ -41,6 +41,16 @@
 	color: tomato;
 }
 
+/* 상세보기 */
+#view tr:nth-child(4) {
+	height: 200px; 
+}
+
+#view tr:nth-child(3) {
+	word-break: break-all;  
+}
+
+
 
 
 

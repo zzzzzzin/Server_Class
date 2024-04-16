@@ -16,7 +16,7 @@
 	
 	<div id="main">
 		
-		<h1>게시판 <small>쓰기</small></h1>
+		<h1 class="sub">게시판 <small>쓰기</small></h1>
 		
 		<form method="POST" action="/toy/board/add.do">
 		<table class="vertical">
