@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.test.toy.board.model.BoardDTO;
+import com.test.toy.board.model.CommentDTO;
 import com.test.util.DBUtil;
 
 public class BoardDAO {
@@ -42,12 +44,30 @@ public class BoardDAO {
 		return 0;
 	}
 
-	public ArrayList<BoardDTO> list() {
+	public ArrayList<BoardDTO> list(HashMap<String, String> map) {
 		
 		//queryNoParamListReturn
 		try {
 			
-			String sql = "select * from vwBoard";
+			//목록보기 > select * from vwBoard
+			//검색하기 > select * from vwBoard where 조건
+			String where = "";
+			
+			if (map.get("search").equals("y")) {
+				
+				//where subject like '%강아지%'
+				//where content like '%강아지%'
+				//where name like '%강아지%'
+				
+				where = String.format("where %s like '%%%s%%'"
+										, map.get("column")
+										, map.get("word"));
+			}
+			
+			String sql = String.format("select * from (select a.*, rownum as rnum from vwBoard a %s) where rnum between %s and %s"
+										, where
+										, map.get("begin")
+										, map.get("end"));
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -115,7 +135,8 @@ public class BoardDAO {
 	}
 
 	public void updateReadcount(String seq) {
-
+		
+		//queryParamNoReturn
 		try {
 
 			String sql = "update tblBoard set readcount = readcount + 1 where seq = ?";
@@ -129,10 +150,12 @@ public class BoardDAO {
 			System.out.println("BoardDAO.updateReadcount");
 			e.printStackTrace();
 		}
+		
 	}
 
 	public int edit(BoardDTO dto) {
-
+		
+		//queryParamNoReturn
 		try {
 
 			String sql = "update tblBoard set subject = ?, content = ? where seq = ?";
@@ -148,11 +171,13 @@ public class BoardDAO {
 			System.out.println("BoardDAO.edit");
 			e.printStackTrace();
 		}
+		
 		return 0;
 	}
 
 	public int del(String seq) {
 		
+		//queryParamNoReturn
 		try {
 
 			String sql = "delete from tblBoard where seq = ?";
@@ -164,6 +189,59 @@ public class BoardDAO {
 
 		} catch (Exception e) {
 			System.out.println("BoardDAO.del");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int getTotalCount(HashMap<String, String> map) {
+		
+		//queryParamTokenReturn
+		try {
+			
+			String where = "";
+			
+			if (map.get("search").equals("y")) {
+				
+				where = String.format("where %s like '%%%s%%'"
+										, map.get("column")
+										, map.get("word"));
+			}
+
+			String sql = String.format("select count(*) as cnt from vwBoard %s", where);
+
+			pstat = conn.prepareStatement(sql);
+
+			rs = pstat.executeQuery();
+
+			if (rs.next()) {
+
+				return rs.getInt("cnt");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int addComment(CommentDTO dto) {
+
+		try {
+
+			String sql = "insert into tblComment (seq, content, id, regdate, bseq) values (seqComment.nextVal, ?, ?, default, ?)";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getContent());
+			pstat.setString(2, dto.getId());
+			pstat.setString(3, dto.getBseq());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.addComment");
 			e.printStackTrace();
 		}
 		

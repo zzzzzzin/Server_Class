@@ -1,5 +1,6 @@
 /* webapp > asset > css > main.css */
 
+/* 회원 정보 */
 #info img {
 	border: 1px solid #AAA;
 	width: 150px;
@@ -21,10 +22,13 @@
 	width: 225px;
 }
 
+
+
+
 /* 게시판 목록보기 */
 
 #list th:nth-child(1) { width: 50px; }
-#list th:nth-child(1) { width: auto; }
+#list th:nth-child(2) { width: auto; }
 #list th:nth-child(3) { width: 70px; }
 #list th:nth-child(4) { width: 120px; }
 #list th:nth-child(5) { width: 50px; }
@@ -41,14 +45,44 @@
 	color: tomato;
 }
 
+
+
 /* 상세보기 */
 #view tr:nth-child(4) {
-	height: 200px; 
+	height: 200px;
 }
 
-#view tr:nth-child(3) {
-	word-break: break-all;  
+#view tr:nth-child(3) td {
+	word-break: break-all;
 }
+
+
+/* 검색 폼 */
+#searchForm {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+#labelSearchResult {
+	margin: .5rem;
+	text-align: center;
+}
+
+#pagebar {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+
+
+/* 댓글 */
+#comment td:nth-child(1) { width: auto; }
+#comment td:nth-child(2) { width: 150px; text-align: center; }
+#comment .commentContent div:last-child { font-size: 12px; text-align: right; }
+
+#addComment td:nth-child(1) { width: auto; }
+#addComment td:nth-child(2) { width: 150px; text-align: center; }
+
 
 
 

@@ -20,6 +20,11 @@ public class Edit extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		//인증받지 못한 사용자 or 권한이 없는 사용자 > 접근 거부
+		if (Auth.check(req, resp)) {
+			return;
+		}
+		
 		//1. 데이터 가져오기(seq)
 		//2. DB 작업 > select > 수정할 데이터의 원본을 미리 보여주기 위해서
 		//3. 결과 > 출력

@@ -22,6 +22,7 @@ create table tblUser (
 
 alter table tblUser
     add (ing number (1) default 1 not null);
+update tblUser set ing = 1, pw='1111', name='홍길동', email='hong@gamil.com' where id = 'hong';
 
 insert into tblUser (id, pw, name, email, lv, pic, intro, regdate)
     values ('hong', '1111', '홍길동', 'hong@gmail.com', 1, default, '반갑습니다.', default);
@@ -62,7 +63,8 @@ select seq, subject, id, readcount,
         else 
             to_char(regdate, 'yyyy-mm-dd')
     end regdate,
-    (sysdate - regdate) as isnew
+    (sysdate - regdate) as isnew,
+    content
 from tblBoard 
     order by seq desc;
 
@@ -71,3 +73,18 @@ select * from vwBoard;
 update tblBoard set
     regdate = regdate - 1
         where seq = 3;
+        
+create table tblComment (
+    seq number primary key,                             --번호(PK)
+    content varchar2(2000) not null,                    --내용
+    id varchar2(50) not null references tblUser(id),    --아이디(FK)
+    regdate date default sysdate not null,              --작성 날짜
+    bseq number not null references tblBoard(seq)       --부모 글(FK)
+);        
+drop sequence seqComment;
+create sequence seqComment;
+
+delete tblComment;
+select * from tblComment;
+
+commit;
