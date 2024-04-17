@@ -1,8 +1,11 @@
 package com.test.toy.board;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.GpsDirectory;
 import com.test.toy.board.model.BoardDTO;
+import com.test.toy.board.model.CommentDTO;
 import com.test.toy.board.repository.BoardDAO;
 
 @WebServlet("/board/view.do")
@@ -31,9 +38,6 @@ public class View extends HttpServlet {
 		String word = req.getParameter("word");
 		String search = req.getParameter("search");
 		String page = req.getParameter("page");
-		
-		
-		
 		
 		BoardDAO dao = new BoardDAO();
 		
@@ -77,11 +81,55 @@ public class View extends HttpServlet {
 		
 		dto.setSubject(subject);
 		
+		//댓글 목록 가져오기
+		ArrayList<CommentDTO> clist = dao.listComment(seq);
+		
+		System.out.println(clist.size());
+		
+		//첨부 파일 > 정보 가져오기
+		if(dto.getAttach() != null
+				&& (
+						dto.getAttach().toLowerCase().endsWith(".jpg")
+						|| dto.getAttach().toLowerCase().endsWith(".jpeg")
+						|| dto.getAttach().toLowerCase().endsWith(".gif")
+						|| dto.getAttach().toLowerCase().endsWith(".png"))) {
+			
+			//이미지 > 메타 정보 취득
+			BufferedImage img 
+				= ImageIO.read(new File(req.getRealPath("/asset/place") + "/" + dto.getAttach()));
+			
+			//System.out.println(img.getWidth());
+			//System.out.println(img.getHeight());
+			
+			//GPS
+			try {
+				
+				Metadata metadata 
+					= ImageMetadataReader.readMetadata(new File(req.getRealPath("/asset/place") + "/" + dto.getAttach()));
+				
+				GpsDirectory gps
+					= metadata.getFirstDirectoryOfType(GpsDirectory.class);
+				
+				if (gps.containsTag(GpsDirectory.TAG_LATITUDE)
+						&& gps.containsTag(GpsDirectory.TAG_LONGITUDE)) {
+					
+					req.setAttribute("lat", gps.getGeoLocation().getLatitude());
+					req.setAttribute("lng", gps.getGeoLocation().getLongitude());
+				}
+				
+			} catch (Exception e) {
+				System.out.println("View.doGet");
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+			
+		}
 		
 		req.setAttribute("dto", dto);
 		req.setAttribute("column", column);
 		req.setAttribute("word", word);
 		req.setAttribute("page", page);
+		req.setAttribute("clist", clist);
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/view.jsp");
 		dispatcher.forward(req, resp);

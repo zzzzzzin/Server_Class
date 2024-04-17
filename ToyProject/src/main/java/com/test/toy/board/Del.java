@@ -1,5 +1,6 @@
 package com.test.toy.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.test.toy.board.model.BoardDTO;
 import com.test.toy.board.repository.BoardDAO;
 import com.test.util.OutputUtil;
 
@@ -19,6 +21,10 @@ public class Del extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		if (Auth.check(req, resp)) {
+			return;
+		}
+		
 		//1. 데이터 가져오기(seq)
 		//2. 전달
 		
@@ -28,6 +34,7 @@ public class Del extends HttpServlet {
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/del.jsp");
 		dispatcher.forward(req, resp);
+
 	}
 	
 	@Override
@@ -41,6 +48,15 @@ public class Del extends HttpServlet {
 		
 		BoardDAO dao = new BoardDAO();
 		
+		//첨부 파일 삭제
+		BoardDTO dto = dao.get(seq);
+		
+		if (dto.getAttach() != null) {
+			File file = new File(req.getRealPath("/asset/place") + "/" + dto.getAttach());
+			file.delete();
+		}
+		
+		
 		int result = dao.del(seq);
 		
 		if (result == 1) {
@@ -53,7 +69,10 @@ public class Del extends HttpServlet {
 		}
 		
 	}
+
 }
+
+
 
 
 

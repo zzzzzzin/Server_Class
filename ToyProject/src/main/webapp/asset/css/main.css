@@ -83,11 +83,33 @@
 #addComment td:nth-child(1) { width: auto; }
 #addComment td:nth-child(2) { width: 150px; text-align: center; }
 
+.commentInfo span, .commentEdit span { 
+	cursor: pointer;
+}
 
+.commentInfo span:hover, .commentEdit span:hover { 
+	color: cornflowerblue; 
+}
 
+.commentEditRow {
+	background: rgba(0, 0, 0, .05);
+}
 
+.commentCount {
+	font-size: 12px;
+}
+.commentCount > span {
+	font-size: 14px;
+}
 
+#imgPlace {
+	max-width: 570px;
+}
 
+#map {
+	width: 570px;
+	height: 300px;
+}
 
 
 

@@ -28,8 +28,12 @@
 				<th>내용</th>
 				<td><textarea name="content" id="content" required class="full">${dto.content}</textarea></td>
 			</tr>
+			<tr>
+				<th>장소</th>
+				<td><input type="file" value=""></td>
+			</tr>
 		</table>
-		<div>
+		<div class="group">
 			<button type="button" class="back" onclick="location.href='/toy/board/view.do?seq=${seq}';">돌아가기</button>
 			<button type="submit" class="edit primary">수정하기</button>
 		</div>

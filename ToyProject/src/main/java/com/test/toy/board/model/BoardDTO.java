@@ -15,5 +15,12 @@ public class BoardDTO {
 	private String name;	//작성자
 	private double isnew;	//최신글
 	
+	private String commentcount; //댓글 수
+	
+	private int thread; //답변형
+	private int depth;	//답변형
+	
+	private String attach; //첨부파일
+	
 	
 }

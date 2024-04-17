@@ -24,9 +24,10 @@ public class Info extends HttpServlet {
 		String id = (String)session.getAttribute("id");
 		
 		UserDAO dao = new UserDAO();
-		
+			
 		UserDTO dto = dao.getUser(id);
 		
+			
 		
 		dto.setIntro(dto.getIntro().replace("\r\n",  "<br>"));
 		

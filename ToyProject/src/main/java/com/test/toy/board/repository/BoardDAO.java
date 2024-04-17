@@ -27,12 +27,15 @@ public class BoardDAO {
 		//queryParamNoReturn
 		try {
 
-			String sql = "insert into tblBoard (seq, subject, content, id, regdate, readcount) values (seqBoard.nextVal, ?, ?, ?, default, default)";
+			String sql = "insert into tblBoard (seq, subject, content, id, regdate, readcount, thread, depth, attach) values (seqBoard.nextVal, ?, ?, ?, default, default, ?, ?, ?)";
 
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, dto.getSubject());
 			pstat.setString(2, dto.getContent());
 			pstat.setString(3, dto.getId());
+			pstat.setInt(4, dto.getThread());
+			pstat.setInt(5, dto.getDepth());
+			pstat.setString(6, dto.getAttach());
 
 			return pstat.executeUpdate();
 
@@ -87,6 +90,10 @@ public class BoardDAO {
 				
 				dto.setIsnew(rs.getDouble("isnew"));
 				
+				dto.setCommentcount(rs.getString("commentcount"));
+				
+				dto.setDepth(rs.getInt("depth"));
+				
 				list.add(dto);			
 			}	
 			
@@ -122,6 +129,11 @@ public class BoardDAO {
 				dto.setId(rs.getString("id"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setReadcount(rs.getString("readcount"));
+				
+				dto.setThread(rs.getInt("thread"));
+				dto.setDepth(rs.getInt("depth"));
+				
+				dto.setAttach(rs.getString("attach"));
 				
 				return dto;				
 			}	
@@ -180,8 +192,14 @@ public class BoardDAO {
 		//queryParamNoReturn
 		try {
 
-			String sql = "delete from tblBoard where seq = ?";
-
+			String sql = "";
+			
+			sql = "delete from tblComment where bseq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			pstat.executeUpdate();
+			
+			sql = "delete from tblBoard where seq = ?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, seq);
 
@@ -228,7 +246,8 @@ public class BoardDAO {
 	}
 
 	public int addComment(CommentDTO dto) {
-
+		
+		//queryParamNoReturn
 		try {
 
 			String sql = "insert into tblComment (seq, content, id, regdate, bseq) values (seqComment.nextVal, ?, ?, default, ?)";
@@ -246,6 +265,307 @@ public class BoardDAO {
 		}
 		
 		return 0;
+	}
+
+	public ArrayList<CommentDTO> listComment(String seq) {
+		
+		//queryParamListReturn
+		try {
+			
+			String sql = "select * from (select b.*, rownum as rnum from (select a.*, (select name from tblUser where id = a.id) as name from tblComment a where bseq = ? order by seq desc) b) where rnum between ? and ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			pstat.setString(2, "1");
+			pstat.setString(3, "10");
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
+			
+			while (rs.next()) {
+				
+				CommentDTO dto = new CommentDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setContent(rs.getString("content"));
+				dto.setName(rs.getString("name"));
+				dto.setId(rs.getString("id"));
+				dto.setRegdate(rs.getString("regdate"));
+				
+				list.add(dto);		
+			}	
+			
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public CommentDTO getComment() {
+		
+		//queryNoParamDTOReturn
+		try {
+			
+			String sql = "select a.*, (select name from tblUser where id = a.id) as name from tblComment a where seq = (select max(seq) from tblComment)";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			if (rs.next()) {
+				
+				CommentDTO dto = new CommentDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setContent(rs.getString("content"));
+				dto.setName(rs.getString("name"));
+				dto.setId(rs.getString("id"));
+				dto.setRegdate(rs.getString("regdate"));
+				
+				return dto;				
+			}	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public int delComment(String seq) {
+		
+		//queryParamNoReturn
+		try {
+
+			String sql = "delete from tblComment where seq = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delComment");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int editComment(CommentDTO dto) {
+		
+		//queryParamNoReturn
+		try {
+
+			String sql = "update tblComment set content = ? where seq = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getContent());
+			pstat.setString(2, dto.getSeq());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.editComment");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int getMaxThread() {
+		
+		//queryNoParamTokenReturn
+		try {
+
+			String sql = "select nvl(max(thread), 0) as thread from tblBoard";
+
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+
+			if (rs.next()) {
+				return rs.getInt("thread");
+			}
+
+			return stat.executeUpdate(sql);
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.getMaxThread");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public void updateThread(HashMap<String, Integer> map) {
+		
+		//queryParamNoReturn
+		try {
+
+			String sql = "update tblBoard set thread = thread - 1 where thread > ? and thread < ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setInt(1, map.get("previousThread"));
+			pstat.setInt(2, map.get("parentThread"));
+
+			pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.updateThread");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public ArrayList<CommentDTO> listMoreComment(HashMap<String, String> map) {
+		
+		//queryParamListReturn
+		try {
+			
+			String sql = "select * from (select b.*, rownum as rnum from (select a.*, (select name from tblUser where id = a.id) as name from tblComment a where bseq = ? order by seq desc) b) where rnum between ? and ? + 9";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, map.get("bseq"));
+			pstat.setString(2, map.get("commentBegin"));
+			pstat.setString(3, map.get("commentBegin"));			
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
+			
+			while (rs.next()) {
+				
+				CommentDTO dto = new CommentDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setContent(rs.getString("content"));
+				dto.setName(rs.getString("name"));
+				dto.setId(rs.getString("id"));
+				dto.setRegdate(rs.getString("regdate"));
+				
+				list.add(dto);				
+			}	
+			
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public void addHashtag(String tagName) {
+		
+		//queryParamNoReturn
+		try {
+
+			String sql = "insert into tblHashtag (seq, tag) values (seqHashtag.nextVal, ?)";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tagName);
+
+			pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.addHashtag");
+			e.printStackTrace();
+		}
+		
+	}
+
+	public boolean existHashtag(String tagName) {
+		
+		//queryParamTokenReturn
+		try {
+
+			String sql = "select count(*) as cnt from tblHashtag where tag = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tagName);
+
+			rs = pstat.executeQuery();
+
+			if (rs.next()) {
+
+				return rs.getInt("cnt") == 1 ? false : true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
+
+	public String getBseq() {
+		
+		//queryNoParamTokenReturn
+		try {
+
+			String sql = "select max(seq) as seq from tblBoard";
+
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+
+			if (rs.next()) {
+				return rs.getString("seq");
+			}
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.getBseq");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public String getHseq(String tagName) {
+		
+		//queryParamTokenReturn
+		try {
+
+			String sql = "select seq from tblHashtag where tag = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tagName);
+
+			rs = pstat.executeQuery();
+
+			if (rs.next()) {
+
+				return rs.getString("seq");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public void addTagging(HashMap<String, String> map) {
+		
+		//queryParamNoReturn
+		try {
+
+			String sql = "insert into tblTagging (seq, bseq, hseq) values (seqTagging.nextVal, ?, ?)";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, map.get("bseq"));
+			pstat.setString(2, map.get("hseq"));
+
+			pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.addTagging");
+			e.printStackTrace();
+		}
+		
 	}
 
 }
