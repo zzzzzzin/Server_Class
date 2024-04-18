@@ -60,12 +60,23 @@
 					<c:if test="${dto.depth > 0}">
 					<span class="material-symbols-outlined" style="margin-left: ${dto.depth * 20}px;">subdirectory_arrow_right</span>
 					</c:if>
+								
+					<c:if test="${dto.secret == '1'}">
+					<span class="material-symbols-outlined">lock</span>			
+					</c:if>
 										
 					<!--  
 						view.do?seq=10
 						view.do?seq=10&column=subject&word=검색어&search=y
 					-->
+					<c:if test="${dto.secret == 1 and dto.id != id}">
+					<a href="#!">${dto.subject}</a>
+					</c:if>
+					
+					<c:if test="${(dto.secret == 1 and dto.id == id)
+								 || dto.secret == 0}">
 					<a href="/toy/board/view.do?seq=${dto.seq}&column=${map.column}&word=${map.word}&search=${map.search}&page=${nowPage}">${dto.subject}</a>
+					</c:if>
 					
 					<c:if test="${dto.commentcount > 0}">
 					<!-- 댓글 갯수 -->

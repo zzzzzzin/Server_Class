@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <%@include file="/WEB-INF/views/inc/asset.jsp" %>
+<link rel="stylesheet" href="/toy/asset/css/tagify.css">
 <style>
 	
 </style>
@@ -18,7 +19,7 @@
 		
 		<h1 class="sub">게시판 <small>수정하기</small></h1>
 		
-		<form method="POST" action="/toy/board/edit.do">
+		<form id="editForm" method="POST" action="/toy/board/edit.do">
 		<table class="vertical">
 			<tr>
 				<th>제목</th>
@@ -29,8 +30,8 @@
 				<td><textarea name="content" id="content" required class="full">${dto.content}</textarea></td>
 			</tr>
 			<tr>
-				<th>장소</th>
-				<td><input type="file" value=""></td>
+				<th>태그</th>
+				<td><input type="text" name="tag" id="tag" class="full"></td>
 			</tr>
 		</table>
 		<div class="group">
@@ -43,9 +44,29 @@
 		
 	</div>
 	
+	<script src="/toy/asset/js/tagify.min.js"></script>
 	<script>
 		
+		let taglist = '';
+		<c:forEach items="${dto.tag}" var="tag">
+		taglist += '${tag},';
+		</c:forEach>
+		
+		$('#tag').val(taglist);
+	
+		const tagify = new Tagify(document.getElementById('tag'));
+		tagify.on('remove', (e)=>{
+			
+			//alert(e.detail.data.value);
+			$('#editForm').append(`<input type="hidden" name="removeTag" value="\${e.detail.data.value}">`);
+			
+		}).on('add', (e)=>{
+			//alert(e.detail.data.value);
+			$(`#editForm input[value=\${e.detail.data.value}]`).remove();
+		});
+		
 	</script>
+	
 </body>
 </html>
 

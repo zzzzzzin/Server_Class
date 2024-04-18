@@ -73,6 +73,7 @@ public class Add extends HttpServlet {
 		String content = multi.getParameter("content");
 		String reply = multi.getParameter("reply");
 		String tag = multi.getParameter("tag");
+		String secret = multi.getParameter("secret");
 		
 		
 
@@ -123,6 +124,8 @@ public class Add extends HttpServlet {
 		
 		dto.setAttach(multi.getFilesystemName("attach"));
 		
+		dto.setSecret(secret != null ? secret : "0");
+		
 		
 		
 		int result = dao.add(dto);
@@ -152,10 +155,11 @@ public class Add extends HttpServlet {
 						dao.addHashtag(tagName);
 					} 
 					
-					String hseq = dao.getHseq(tagName);		
+					String hseq = dao.getHseq(tagName);	
+					System.out.println("hseq: " + hseq);
 					
 					//관계 추가
-					HashMap<String,String> map = new HashMap<>();
+					HashMap<String,String> map = new HashMap<String,String>();
 					map.put("bseq", bseq);
 					map.put("hseq", hseq);
 					

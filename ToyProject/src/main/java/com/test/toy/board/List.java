@@ -81,7 +81,12 @@ public class List extends HttpServlet {
 		if (column == null) column = "";
 		if (word == null) word = "";
 		
+		//column: 
+		//System.out.println("column: " + column);
+		//System.out.println("column != null > " + column != null);
+		
 		map.put("search", search); //n, y
+		//map.put("column", column != null ? column : "");
 		map.put("column", column);
 		map.put("word", word);		
 		
@@ -94,6 +99,16 @@ public class List extends HttpServlet {
 		
 		//조회수 관련
 		session.setAttribute("read", "n");
+		
+		
+		
+		
+		//해시 태그
+		//- list.do
+		//- list.do?tag=게시판
+		String tag = req.getParameter("tag");
+		map.put("tag", tag);
+		
 		
 		
 		//1. DB 작업 > select
@@ -153,6 +168,8 @@ public class List extends HttpServlet {
 		
 		loop = 1; //루프 변수(10바퀴)
 		n = ((nowPage - 1) / blockSize) * blockSize + 1; //페이지 번호 역할
+		
+		System.out.println("확인: " + column);
 		
 		
 		//이전 10페이지

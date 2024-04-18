@@ -68,9 +68,10 @@ select seq, subject, id, readcount,
     (sysdate - regdate) as isnew,
     content,
     (select count(*) from tblComment where bseq = tblBoard.seq) commentCount,
-    depth
+    depth,
+    secret
 from tblBoard
-order by thread desc;
+    order by thread desc;
 
 select * from vwBoard;    
     
@@ -132,7 +133,8 @@ create table tblBoard (
     readcount number default 0 not null,                --조회수
     thread number not null,                             --답변형(정렬)
     depth number not null,                              --답변형(출력)
-    attach varchar2(100) null                           --첨부파일
+    attach varchar2(100) null,                          --첨부파일
+    secret number(1) not null                           --비밀글(0-공개, 1-비밀)
 );
 
 --게시물 1개 <- N:N -> 해시태그 1개
@@ -154,5 +156,48 @@ create sequence seqTagging;
 
 select * from tblHashtag;
 select * from tblTagging;
+
+drop table tblComment;
+drop table tblTagging;
+drop table tblBoard;
+
+select * from tblBoard;
+
+delete from tblTagging
+    where bseq = ? and hseq = (select seq from tblHashtag where tag = ?);
+
+create table tblLog(
+    seq number primary key,                             --번호(PK)
+    id varchar2(50) not null references tblUser(id),    --아이디(FK)
+    regdate date default sysdate not null               --접속시각
+);
+
+create sequence seqLog;
+
+select * from tblLog order by regdate desc;
+select * from tblBoard;
+select count(*) from tblBoard;  --216
+select count(*) from tblLog;    --71
+
+select count(*) from tblBoard b 
+    inner join tblLog l
+        on to_char(b.regdate, 'yyyy-mm-dd') = to_char(l.regdate, 'yyyy-mm-dd');
+
+
+delete from tblLog;
+delete from tblBoard;
+delete from tblComment;
+
+--한달간 > 로그인 날짜, 날짜(글쓴 횟수), 날짜(댓글쓴 횟수)
+select
+    to_char(regdate, 'yyyy-mm-dd') as regdate,
+    count(*) as cnt,
+    (select count(*) from tblBoard where to_char(regdate, 'yyyy-mm-dd') 
+        = to_char(a.regdate, 'yyyy-mm-dd')) as bcnt,
+    (select count(*) from tblComment where to_char(regdate, 'yyyy-mm-dd') 
+        = to_char(a.regdate, 'yyyy-mm-dd')) as ccnt
+from tblLog a
+    where to_char(regdate, 'yyyy-mm') = '2024-04'
+        group by to_char(regdate, 'yyyy-mm-dd');
 
 commit;

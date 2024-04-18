@@ -8,10 +8,7 @@
 <%@include file="/WEB-INF/views/inc/asset.jsp" %>
 <link rel="stylesheet" href="/toy/asset/css/tagify.css">
 <style>
-	.tagify.full {
-		border-color: #bbb;
-		border-radius: 3px;
-	}
+	
 </style>
 </head>
 <body>
@@ -47,6 +44,15 @@
 				<th>장소</th>
 				<td><input type="file" name="attach" class="full" accept="image/*"></td>
 			</tr>
+			<tr>
+				<th>비밀글</th>
+				<td>
+					<label style="user-select: none;">
+						<input type="checkbox" name="secret" value="1">
+						작성자만 열람이 가능합니다.
+					</label>
+				</td>
+			</tr>
 		</table>
 		<div>
 			<button type="button" class="back" onclick="location.href='/toy/board/list.do';">돌아가기</button>
@@ -66,9 +72,9 @@
 		new Tagify(document.getElementById('tag'));
 		
 		/* window.onclick = function() {
-			//[{"value":"안녕"}]
+			//[{"value":"코딩"},{"value":"자바"},{"value":"게시판"}]
 			alert(document.getElementById('tag').value);
-		} */
+		}; */
 	
 	</script>
 </body>
